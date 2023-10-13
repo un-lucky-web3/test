@@ -1,0 +1,318 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.main-container {
+    text-align: center;
+    /* 居中文本 */
+    max-width: 800px;
+    /* 可选的最大宽度 */
+    width: 100%;
+    /* 宽度100% */
+    padding: 20px;
+    /* 内边距 */
+    box-sizing: border-box;
+    /* 确保内边距不影响宽度 */
+}
+
+#languageSelector {
+    position: fixed;
+    /* 固定位置 */
+    top: 10px;
+    /* 距离顶部的距离 */
+    right: 10px;
+    /* 距离右侧的距离 */
+    z-index: 1000;
+    /* 确保在其他元素之上 */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.optional-field {
+    font-size: 12px;
+    color: #777;
+    display: block;
+    margin: 5px 0;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#status {
+    text-align: center;
+    margin-top: 10px;
+    color: green;
+}
+
+#rechargeButton:disabled {
+    background-color: #ccc;
+    /* 禁用时的背景颜色 */
+    color: #999;
+    /* 禁用时的文字颜色 */
+    cursor: not-allowed;
+    /* 鼠标指针样式 */
+}
+
+#rechargeButton:hover:enabled {
+    background-color: #007bff;
+    /* 悬停时的背景颜色（如果按钮启用） */
+    color: #fff;
+    /* 悬停时的文字颜色（如果按钮启用） */
+}
+
+#withdrawButton:disabled {
+    background-color: #ccc;
+    /* 禁用时的背景颜色 */
+    color: #999;
+    /* 禁用时的文字颜色 */
+    cursor: not-allowed;
+    /* 鼠标指针样式 */
+}
+
+#withdrawButton:hover:enabled {
+    background-color: #007bff;
+    /* 悬停时的背景颜色（如果按钮启用） */
+    color: #fff;
+    /* 悬停时的文字颜色（如果按钮启用） */
+}
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.modal-content {
+    position: absolute;
+    /* 绝对定位 */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
+    -webkit-user-select: none;
+    /* Safari 3.1+ */
+    -moz-user-select: none;
+    /* Firefox 2+ */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* 标准语法 */
+    top: 50%;
+    /* 从顶部开始的位置 */
+    left: 50%;
+    /* 从左侧开始的位置 */
+    transform: translate(-50%, -50%);
+    /* 使用转换来居中 */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #888;
+    transition: color 0.3s;
+    -webkit-user-select: none;
+    /* Safari 3.1+ */
+    -moz-user-select: none;
+    /* Firefox 2+ */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* 标准语法 */
+}
+
+.modal-close:hover {
+    color: #555;
+}
+
+#modalMessage {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* 更改对齐方式以适应新结构 */
+    flex-wrap: nowrap;
+}
+
+.recharge-field {
+    flex: 1;
+    position: relative;
+    /* 使绝对定位的子元素相对于此元素 */
+}
+
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* 垂直顶部对齐 */
+}
+
+.inviter-field,
+.recharge-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* 垂直排列子元素 */
+}
+
+.input-row input,
+.input-row button {
+    margin: 5px;
+    min-width: 150px;
+}
+
+.optional-field {
+    font-size: 12px;
+    color: #888;
+    margin-left: 5px;
+}
+
+#status {
+    position: fixed;
+    /* 固定定位 */
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    /* 使弹窗居中 */
+    padding: 10px;
+    background-color: #f9f9f9;
+    /* 背景颜色 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    display: none;
+    /* 初始隐藏 */
+    z-index: 1000;
+    /* 确保在其他元素之上 */
+    min-width: 200px;
+    /* 最小宽度，确保空间 */
+}
+
+#statusMessage {
+    font-size: 14px;
+    /* 字体大小 */
+    color: #e44d26;
+    /* 现眼的字体颜色 */
+    padding-right: 20px;
+    /* 为关闭按钮留出空间 */
+}
+
+#closeStatus {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+#closeStatus:hover {
+    color: #333;
+}
+
+.user-info-section {
+    display: none;
+}
+
+.user-info,
+.game-info {
+    width: 100%;
+    /* 占满父div的宽度 */
+    background-color: transparent;
+    /* 设置背景颜色为透明 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+.info-row {
+    display: grid;
+    /* 使用网格布局 */
+    grid-template-columns: 1fr 2fr;
+    /* 分为两列 */
+    align-items: center;
+    /* 垂直居中对齐 */
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+}
+
+span {
+    flex: 2;
+    color: #555;
+}
+
+#percentage {
+    margin: 6px;
+}
+
+.win {
+    color: green;
+    font-weight: bold;
+}
+
+.loss {
+    color: red;
+    font-weight: bold;
+}

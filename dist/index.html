@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>UNLUCKY CO.</title>
+
+   <link rel="stylesheet" href="/css/animate.css">
+   <link rel="stylesheet" href="/css/basic.css">
+   <script src="https://unpkg.com/web3@1.5.2/dist/web3.min.js"></script>
+   <script src="lang.js"></script>
+   <script src="/js/info.js"></script>
+   <script src="/js/op.js"></script>
+   
+</head>
+
+<body>
+   <div class="languages">
+      <div><a href="/zh_HK/">中文</a></div>
+      <div><a href="/en_US/">English</a></div>
+      <div><a href="/ru_RU/">Русский</a></div>
+      <div><a href="/jp_JP/">日本語</a></div>
+   </div>
+   <div class="container">
+      <div class="header">
+         <div class="logo"> </div>
+         <div class="logo-text">UNLUCKY CO.</div>
+      </div>
+      <div class="title">
+         Game Introduction
+      </div>
+      <header> 
+         UNLUCKY CO. is filled with excitement and suspense, it's not just a game; it's also an innovative financial ecosystem where you can immerse yourself and enjoy the dual thrill of gaming and investment.
+      </header>
+      <div class="panels">
+         <div class="box">
+            <div>
+               <span class="box-title">1.</span>
+               Each round of the game ends randomly after reaching 10 people. After the end, all players will be randomly divided into two groups. The half with the smallest total amount becomes the unlucky ones, and the other half becomes the lucky ones.
+            </div>
+            <div class="ani-sec ani-box">
+               <div class="sec-1-lucky icon"></div>
+               <div class="sec-1-unlucky icon"></div>
+            </div>
+         </div>
+         <div class="box">
+            <div>
+               <span class="box-title">2.</span>
+               Unlucky ones become permanent shareholders of Unlucky Co., and the entire recharge amount becomes company shares, adding an equivalent value to the prize pool.
+            </div>
+            <div class="ani-sec ani-box">
+               <div class="sec-2-co icon"></div>
+               <div class="sec-2-unlucky icon"></div>
+               <div class="sec-2-money sec-2-m-1 icon"></div>
+               <div class="sec-2-money sec-2-m-2 icon"></div>
+               <div class="sec-2-money sec-2-m-3 icon"></div>
+               <div class="sec-2-money sec-2-m-4 icon"></div>
+               <div class="sec-2-money sec-2-m-5 icon"></div>
+               <div class="sec-2-money sec-2-m-6 icon"></div>
+            </div>
+         </div>
+         <div class="box">
+            <div>
+               <span class="box-title">3.</span>
+               Lucky ones receive 88% of the prize pool, Unlucky Co. shareholders receive 8% of the prize pool, and community operations receive 4% of the prize pool.
+            </div>
+            <div class="ani-sec ani-box">
+               <div class="sec-3-co icon"></div>
+               <div class="sec-3-money sec-3-m-l icon"></div>
+               <div class="sec-3-money sec-3-m-r icon"></div>
+               <div class="sec-3-lucky icon"></div>
+               <div class="sec-3-unlucky icon"></div>
+
+            </div>
+         </div>
+      </div>
+
+      <div class="title">
+         Game Data
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Pending Dividend Total</div>
+            <div id="totalDividendAmount"></div>
+         </div>
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Total Players</div>
+            <div id="totalPlays">------</div>
+         </div>
+         <div class="box">
+            <div class="box-title">Total Shares</div>
+            <div id="totalShares">------</div>
+         </div>
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Start Time</div>
+            <div id="startTime">---------- --:--:--</div>
+         </div>
+         <div class="box">
+            <div class="box-title">Current Round</div>
+            <div id="currentRound">----</div>
+         </div>
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Participants in This Round</div>
+            <div id="players">
+               <div><div class="amount">10000</div><div class="name">*1ab14</div></div>
+               <div class="me"><div class="amount">10000</div><div class="name">*1ab14</div></div>
+            </div>
+            <div class="tips">
+               The value is each user’s participation amount and wallet address. If the user who triggers the end of the game is unlucky, he will receive 2 times the shares.
+            </div>
+         </div>
+      </div>
+      <div class="title">
+         Control Panel
+      </div>
+      <div class="panels">
+         <!-- 充值，邀请，提现。
+         余额，账户名，状态，记录，股权信息。 -->
+         <div class="box">
+            <div class="box-title">Wallet</div>
+            <div>Connected Wallet Address: <span id="address"></span></div>
+            <div>
+               Balance: <span id="balance"></span>
+            </div>
+            <div class="buttons">
+               <div id="withdrawButton" class="button" onclick="withdraw();">Withdraw</div>
+               <div id="continueButton" class="button" onclick="continueGame();">Enter the Game</div>
+            </div>
+            <div class="tips">
+               Reinvesting your balance in the game will reward you with an additional 10% of shares!
+            </div>
+         </div>
+         <div class="box">
+            <div class="box-title">Recharge</div>
+            <input id="inviter" placeholder="Referrer" />
+            <div class="eth">
+               <input id="rechargeAmount" placeholder="Amount" />
+            </div>
+            <div id="rechargeButton" class="button" onclick="recharge();">Recharge</div>
+            <div class="tips">
+               Recharge amount will automatically participate in the current round of the game and can be recharged multiple times in the same round. If you fill in the referrer, 3% of the recharge amount will be given to the referrer. Otherwise, 4% will be donated to operational expenses.
+            </div>
+         </div>
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Equity</div>
+            <div>
+               Owned Shares: <span id="userShare"></span>
+            </div>
+            <div>
+               Percentage: <span id="shareRatio"></span>%
+            </div>
+            <div id="dividendButton" class="button" onclick="claimDividend();">Apply for Dividend</div>
+            <div class="tips">
+               Every player can apply for a dividend once every 30 days. You will receive an amount based on your share percentage of the pending dividend total.
+            </div>
+         </div>
+         <div class="box">
+            <div class="box-title">Invite</div>
+            <input id="inviteURL" value="https://un-lucky.com" disabled>
+            <div class="button" onclick="copyInviteUrl();">Copy Invitation Link</div>
+            <div class="tips">
+            Players who recharge via your invitation link will give you 3% of their recharge amount.
+            </div>
+         </div>
+      </div>
+      <div class="panels">
+         <div class="box">
+            <div class="box-title">Donate</div>
+            <div class="eth">
+               <input id="donateAmount" value="0.01">
+            </div>
+            <div id="donateButton" class="button" onclick="donate();">Donate</div>
+            <div class="tips">
+               You can donate a certain amount to the community and receive 150% of shares in return.
+            </div>
+         </div>
+         <div class="box">
+            <div class="box-title">Airdrop</div>
+            <textarea id="airdropCode" value=""></textarea>
+            <div id="airdropButton" class="button" onclick="airdrop();">Claim Airdrop</div>
+            <div class="tips">
+               You can follow the community and get airdrop redemption codes, which can be redeemed for 0.1ETH shares.
+            </div>
+         </div>
+         
+      </div>
+   </div>
+   <div class="container footer">
+      Twitter(X): <a href="https://twitter.com/un_lucky_com">https://twitter.com/un_lucky_com</a> <br>
+      Discord: <a href="https://discord.gg/XaEbp8yrZ2">https://discord.gg/XaEbp8yrZ2</a>
+   </div>
+</body>
+
+</html>

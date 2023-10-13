@@ -1,0 +1,224 @@
+@keyframes sec-1-lucky {
+   0% {
+      left: 20%;
+      top: 20%;
+      transform: scale(120%);
+      z-index: 2;
+   }
+   25% {
+      left: 40%;
+      top: 40%;
+      transform: none;
+   }
+   50% {
+      transform: scale(80%);
+      z-index: 1;
+   }
+   75% {
+      left: 0;
+      top:0;
+      transform: none;
+   }
+   100%{
+      left: 20%;
+      top: 20%;
+      transform: scale(120%);
+      z-index: 2;
+   }
+}
+@keyframes sec-1-unlucky {
+   
+   0% {
+      right: 20%;
+      bottom: 20%;
+      transform: scale(80%);
+      z-index: 1;
+   }
+   25% {
+      right: 40%;
+      bottom: 40%;
+      transform: none;
+   }
+   50% {
+      transform: scale(120%);
+      z-index: 2;
+   }
+   75% {
+      right: 0;
+      bottom: 0;
+      transform: none;
+   }
+   100%{
+      right: 20%;
+      bottom: 20%;
+      transform: scale(80%);
+      z-index: 1;
+   }
+}
+@keyframes sec-2-unlucky {
+   0%,100%{
+      transform: rotate(-20deg);
+   }
+   50% {
+      transform: rotate(20deg);
+   }
+}
+@keyframes sec-2-money {
+   0%{
+      transform: rotate(0deg);
+   }
+   100%{
+      transform: rotate(360deg);
+   }
+}
+@keyframes sec-3-boom {
+   0%,55%,75%,100%{
+      transform: scaleX(100%) scaleY(100%);
+   }
+   59% {
+      transform: scaleX(90%) scaleY(110%) rotate(10deg);
+   }
+   63% {
+      transform: scaleX(110%) scaleY(90%)  rotate(-10deg);
+   } 
+}
+@keyframes sec-3-money-y {
+   0%{
+      top: 6.66%;
+      transform: scale(0%);
+   }
+   10%{
+      top:6.66%;
+      transform: scale(60%) rotate(0deg);
+   }
+   100%{
+      top:63.33%;
+      transform: scale(100%) rotate(720deg);
+   }
+}
+@keyframes sec-3-money-l {
+   0%,10%{
+      left: 36.66%;
+   }
+   100%{
+      left:10%;
+   }
+}
+@keyframes sec-3-money-r {
+   0%,10%{
+      left: 36.66%;
+   }
+   100%{
+      left:63.33%;
+   }
+}
+.icon{
+   
+   position: absolute;
+   background-size: 100% 100%;
+}
+.ani-sec{
+   position: relative;
+   height: 300px;
+   width: 300px;
+}
+.sec-1-lucky{
+   width: 60%;
+   height: 60%;
+   background: url(/p/lucky.png);
+   background-size: 100% 100%;
+   animation: sec-1-lucky 3s  infinite;
+}
+.sec-1-unlucky{
+   width: 60%;
+   height: 60%;
+   background: url(/p/unlucky.png);
+   background-size: 100% 100%;
+   animation: sec-1-unlucky 3s infinite;
+}
+.sec-2-unlucky{
+   left: 33.33%;
+   top:26.66%;
+   width: 33.33%;
+   height: 33.33%;
+   background: url(/p/unlucky.png);
+   background-size: 100% 100%;
+   animation: sec-2-unlucky 3s infinite;
+}
+.sec-2-co{
+   width: 50%;
+   height: 50%;
+   left:25%;
+   top:25%;
+   background: url(/p/co.png);
+   background-size: 100% 100%;
+}
+.sec-2-money{
+   width: 26.66%;
+   height: 26.66%;
+   left:36.66%;
+   top:73.33%;
+   background: url(/p/money.png);
+   background-size: 100% 100%;
+   transform-origin: center -86%;
+   animation: sec-2-money 3s linear infinite;
+}
+.sec-2-m-1 {
+   animation-delay: 0s;
+}
+.sec-2-m-2 {
+   animation-delay: 0.5s;
+}
+.sec-2-m-3 {
+   animation-delay: 1s;
+}
+.sec-2-m-4 {
+   animation-delay: 1.5s;
+}
+.sec-2-m-5 {
+   animation-delay: 2s;
+}
+.sec-2-m-6 {
+   animation-delay: 2.5s;
+}
+.sec-3-lucky{
+   left: 0%;
+   top:50%;
+   width: 50%;
+   height: 50%;
+   background: url(/p/lucky.png);
+   background-size: 100% 100%;
+   animation: sec-3-boom 2s infinite;
+}
+.sec-3-unlucky{
+   right: 0%;
+   top:50%;
+   width: 50%;
+   height: 50%;
+   background: url(/p/unlucky.png);
+   background-size: 100% 100%;
+   animation: sec-3-boom 2s 1s infinite;
+}
+.sec-3-co{
+   width: 33.33%;
+   height: 33.33%;
+   left:33.33%;
+   top:0%;
+   background: url(/p/LOGO.png);
+   background-size: 100% 100%;
+}
+.sec-3-money{
+   width: 26.66%;
+   height: 26.66%;
+   left:36.66%;
+   top:6.66%;
+   background: url(/p/money.png);
+   background-size: 100% 100%;
+   transform: scale(0%);
+}
+.sec-3-m-l{
+   animation: sec-3-money-y 2s infinite, sec-3-money-l 2s infinite;
+}
+.sec-3-m-r{
+   animation: sec-3-money-y 2s 1s infinite, sec-3-money-r 2s 1s infinite;
+}
