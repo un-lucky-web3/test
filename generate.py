@@ -29,14 +29,14 @@ def parse_file(file_name):
       for key,value in language_map.items():
          html = [line.replace(f'{{{{{key}}}}}',value) for line in html]
 
-      lang_folder = os.path.join('dist',file[:5])
+      lang_folder = os.path.join('docs',file[:5])
       if not os.path.exists(lang_folder): os.makedirs(lang_folder)
       with open(os.path.join(lang_folder,file_name),'w') as f:
          f.writelines(html)
 
-copy('css','dist/css')
-copy('js','dist/js')
-copy('p','dist/p')
+copy('css','docs/css')
+copy('js','docs/js')
+copy('p','docs/p')
 parse_file('index.html')
 parse_file('lang.js')
-copy_items('dist/en_US','dist')
+copy_items('docs/en_US','docs')

@@ -272,6 +272,15 @@ input::placeholder,textarea::placeholder {
   text-align: center;
   color: white;
 }
+
+.footer > a {
+  display: inline-block;
+}
+.footer > a > img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
 /* 媒体查询框架 */
 /* 在这里添加不同屏幕尺寸的样式 */
 

@@ -267,7 +267,6 @@ async function switchNetwork() {
                 });
             } catch (addError) {
                 console.error(addError);
-                alert(addError);
             }
         } else {
             console.error(switchError);
