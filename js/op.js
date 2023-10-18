@@ -95,11 +95,11 @@ function claimDividend() {
     dividendButton = document.getElementById('dividendButton')
     dividendButton.style.visibility = 'hidden';
     web3.eth.getAccounts().then(accounts => {
-        contract.methods.claimDividend().send({ from: accounts[0] }).then(()=>{
+        contract.methods.claimDividend().send({ from: accounts[0] }).then(() => {
             alert(getWord('dividendSuccessLang'));
-        }).catch((error)=>{
-            alert(getWord('dividendFailureLang')+':'+error);
-        }).finally(()=>{
+        }).catch((error) => {
+            alert(getWord('dividendFailureLang') + ':' + error);
+        }).finally(() => {
             dividendButton.style.visibility = 'visible';
             getInfo();
         })
@@ -111,11 +111,11 @@ function continueGame() {
     continueButton = document.getElementById('continueButton')
     continueButton.style.visibility = 'hidden';
     web3.eth.getAccounts().then(accounts => {
-        contract.methods.continueGame().send({ from: accounts[0] }).then(()=>{
+        contract.methods.continueGame().send({ from: accounts[0] }).then(() => {
             alert(getWord('continueSuccessLang'));
-        }).catch((error)=>{
-            alert(getWord('continueFailureLang')+':'+error);
-        }).finally(()=>{
+        }).catch((error) => {
+            alert(getWord('continueFailureLang') + ':' + error);
+        }).finally(() => {
             continueButton.style.visibility = 'visible';
             getInfo();
         })
@@ -128,11 +128,11 @@ function donate() {
     donateButton = document.getElementById('donateButton');
     donateButton.style.visibility = 'hidden';
     web3.eth.getAccounts().then(accounts => {
-        contract.methods.sponsor().send({ from: accounts[0], value: web3.utils.toWei(amountInEther, 'ether')}).then(()=>{
+        contract.methods.sponsor().send({ from: accounts[0], value: web3.utils.toWei(amountInEther, 'ether') }).then(() => {
             alert(getWord('donateSuccessLang'));
-        }).catch((error)=>{
-            alert(getWord('donateFailureLang')+':'+error);
-        }).finally(()=>{
+        }).catch((error) => {
+            alert(getWord('donateFailureLang') + ':' + error);
+        }).finally(() => {
             donateButton.style.visibility = 'visible';
         })
     })
@@ -144,11 +144,11 @@ function airdrop() {
     airdropButton = document.getElementById('airdropButton');
     airdropButton.style.visibility = 'hidden';
     web3.eth.getAccounts().then(accounts => {
-        contract.methods.airdrop(airdropCode).send({ from: accounts[0] }).then(()=>{
+        contract.methods.airdrop(airdropCode).send({ from: accounts[0] }).then(() => {
             alert(getWord('airdropSuccessLang'));
-        }).catch((error)=>{
-            alert(getWord('airdropFailureLang')+':'+error);
-        }).finally(()=>{
+        }).catch((error) => {
+            alert(getWord('airdropFailureLang') + ':' + error);
+        }).finally(() => {
             airdropButton.style.visibility = 'visible';
             getInfo();
         })
@@ -156,21 +156,21 @@ function airdrop() {
 }
 
 function copyInviteUrl() {
-        var copyText = document.getElementById("inviteURL");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
-        setTimeout(()=>{alert(getWord('copySuccessLang'));},150);
+    var copyText = document.getElementById("inviteURL");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+    setTimeout(() => { alert(getWord('copySuccessLang')); }, 150);
 }
 
 // 获取用户信息
 function getInfo() {
     web3.eth.getAccounts().then(accounts => {
-        contract.methods.getUserInfo().call({from:accounts[0]})
+        contract.methods.getUserInfo().call({ from: accounts[0] })
             .then((user) => {
                 console.log(user);
                 global.user = user
-                displayText("address", accounts[0].substr(0,6)+'***'+accounts[0].substr(39,3))
+                displayText("address", accounts[0].substr(0, 6) + '***' + accounts[0].substr(39, 3))
                 if (user.exist) {
                     displayText("balance", web3.utils.fromWei(user.balance, 'ether'))
                     displayText("userShare", web3.utils.fromWei(user.shares, 'ether'))
@@ -184,28 +184,28 @@ function getInfo() {
             .catch((error) => {
                 console.error(getWord('getUserInfoFailureLang'), error);
             })
-            .finally(()=>{
+            .finally(() => {
 
                 contract.methods.totalDividendAmount().call().then((totalBalance) => {
-                    displayText("totalDividendAmount",web3.utils.fromWei(totalBalance, 'ether'));
+                    displayText("totalDividendAmount", web3.utils.fromWei(totalBalance, 'ether'));
                 });
-            
+
                 displayText("totalPlays", contract.methods.userTotalCount().call());
-                contract.methods.totalShares().call().then((totalShares)=>{
+                contract.methods.totalShares().call().then((totalShares) => {
                     displayText("totalShares", web3.utils.fromWei(totalShares, 'ether'));
-                    console.log(123,totalShares)
+                    console.log(123, totalShares)
                     if (totalShares)
                         displayText("shareRatio", (global.user.shares / parseInt(totalShares) * 100).toFixed(6));
                 })
-                
-                contract.methods.currentGameInfo().call().then((info)=>{
+
+                contract.methods.currentGameInfo().call().then((info) => {
                     if (info) {
                         displayText("startTime", new Date(info.startTimestamp * 1000).toLocaleString());
                         displayText("currentRound", parseInt(info.currentRound));
                     }
                 })
 
-                contract.methods.getPlayerInfoInRound().call().then((info)=>{
+                contract.methods.getPlayerInfoInRound().call().then((info) => {
                     playersDOM = document.getElementById('players');
                     playersDOM.innerHTML = '';
                     info.forEach(player => {
@@ -215,8 +215,8 @@ function getInfo() {
                         amountDOM.textContent = web3.utils.fromWei(player.balance, 'ether');
                         nameDOM = document.createElement('div');
                         nameDOM.className = 'name';
-                        nameDOM.textContent = player.addr.slice(0,6)+"**";
-                        console.log(player.addr , global.user.addr)
+                        nameDOM.textContent = player.addr.slice(0, 6) + "**";
+                        console.log(player.addr, global.user.addr)
                         if (player.addr == global.user.addr) {
                             childDOM.className = "me";
                             nameDOM.innerHTML = getWord('youLang');
@@ -230,15 +230,50 @@ function getInfo() {
     });
 }
 
-function getUrl(name){
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+function getUrl(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  decodeURI(r[2]); return null;
+    if (r != null) return decodeURI(r[2]); return null;
 }
-window.addEventListener('load',()=>{
+window.addEventListener('load', () => {
     document.getElementById("inviter").value = getUrl('inviter') || '';
-    
+
 })
+
+async function switchNetwork() {
+    try {
+        await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x66EED' }], // 0x3 is the chain ID for Ropsten
+        });
+    } catch (switchError) {
+        if (switchError.code === 4902) {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [
+                        {
+                            chainId: '0x66EED',
+                            chainName: 'Arbitrum Goerli',
+                            nativeCurrency: {
+                                name: 'ETH',
+                                symbol: 'ETH',
+                                decimals: 18,
+                            },
+                            rpcUrls: ['https://goerli-rollup.arbitrum.io/rpc'],
+                            blockExplorerUrls: ['https://goerli.arbiscan.io/'],
+                        },
+                    ],
+                });
+            } catch (addError) {
+                console.error(addError);
+                alert(addError);
+            }
+        } else {
+            console.error(switchError);
+        }
+    }
+}
 
 // 检查window.ethereum并连接钱包
 if (window.ethereum) {
@@ -246,13 +281,14 @@ if (window.ethereum) {
     window.ethereum.request({ method: 'eth_requestAccounts' })
         .then(() => {
             initializeApp();
+            switchNetwork();
         })
         .catch((error) => {
             console.log(error)
             alert(getWord('connectWalletLang'));
         });
 
-    window.ethereum.on("accountsChanged",function (accounts) {
+    window.ethereum.on("accountsChanged", function (accounts) {
         getInfo();
     });
 } else {
