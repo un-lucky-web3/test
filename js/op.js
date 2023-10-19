@@ -320,7 +320,7 @@ async function switchNetwork() {
     try {
         await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x66EED' }], // 0x3 is the chain ID for Ropsten
+            params: [{ chainId: '0xA4B1' }],
         });
     } catch (switchError) {
         if (switchError.code === 4902) {
@@ -329,15 +329,15 @@ async function switchNetwork() {
                     method: 'wallet_addEthereumChain',
                     params: [
                         {
-                            chainId: '0x66EED',
-                            chainName: 'Arbitrum Goerli',
+                            chainId: '0xA4B1',
+                            chainName: 'Arbitrum One',
                             nativeCurrency: {
                                 name: 'ETH',
                                 symbol: 'ETH',
                                 decimals: 18,
                             },
-                            rpcUrls: ['https://goerli-rollup.arbitrum.io/rpc'],
-                            blockExplorerUrls: ['https://goerli.arbiscan.io/'],
+                            rpcUrls: ['https://un-lucky.com/arbitrum'],
+                            blockExplorerUrls: ['https://explorer.arbitrum.io'],
                         },
                     ],
                 });
