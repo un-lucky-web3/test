@@ -177,6 +177,7 @@ function getInfo() {
                     var currentURLWithoutParams = window.location.origin + window.location.pathname;
                     document.getElementById('inviteURL').value = currentURLWithoutParams + '?inviter=' + accounts[0];
 
+                    // 距离上一次分红超过30天才能再次申请分红
                     var currentTime = Math.floor(Date.now() / 1000);
                     var daysDifference = (currentTime - user.lastDividendTime) / (60 * 60 * 24);
                     if (daysDifference < 30) {
