@@ -337,7 +337,7 @@ async function switchNetwork() {
                                 decimals: 18,
                             },
                             rpcUrls: ['https://un-lucky.com/arbitrum'],
-                            blockExplorerUrls: ['https://explorer.arbitrum.io'],
+                            blockExplorerUrls: ['https://arbiscan.io'],
                         },
                     ],
                 });
