@@ -14,7 +14,7 @@ async function checkBalance(account) {
     console.log(balance.toString());
 
     if (balance.comparedTo(minRechargeAmount) < 0) {
-        disableButton("rechargeButton");
+        disableButton("rechargeButton", getWord("insufficientWalletBalanceLang"));
     } else {
         enableButton("rechargeButton", recharge);
     }
@@ -186,14 +186,17 @@ function copyInviteUrl() {
     setTimeout(() => { alert(getWord('copySuccessLang')); }, 150);
 }
 
-function disableButton(name) {
-    document.getElementById(name).onclick = null;
-    document.getElementById(name).classList.add("disabled");
+function disableButton(name, txt) {
+    const button = document.getElementById(name);
+    button.onclick = null;
+    button.classList.add("disabled");
+    button.title = txt === undefined ? "" : txt;
 }
 
 function enableButton(name, func) {
     document.getElementById(name).onclick = func;
     document.getElementById(name).classList.remove("disabled");
+    button.title = "";
 }
 
 // 获取用户信息
@@ -214,14 +217,14 @@ function getInfo() {
 
                     // 用户余额为0禁止提现
                     if (balance.comparedTo(zeroAmount) === 0) {
-                        disableButton("withdrawButton");
+                        disableButton("withdrawButton", getWord("insufficientWithdrawalBalanceLang"));
                     } else {
                         enableButton("withdrawButton", withdraw);
                     }
 
                     // 用户余额小于0.01禁止继续游戏
                     if (balance.comparedTo(minRechargeAmount) < 0) {
-                        disableButton("continueButton");
+                        disableButton("continueButton", getWord("insufficientGameBalanceLang"));
                     } else {
                         enableButton("continueButton", continueGame);
                     }
@@ -230,7 +233,7 @@ function getInfo() {
                     var currentTime = Math.floor(Date.now() / 1000);
                     var daysDifference = (currentTime - user.lastDividendTime) / (60 * 60 * 24);
                     if (daysDifference < 30 || shares.comparedTo(zeroAmount) === 0) {
-                        disableButton("dividendButton");
+                        disableButton("dividendButton", getWord("dividendConditionsNotMetLang"));
                     } else {
                         enableButton("dividendButton", claimDividend);
                     }
@@ -242,14 +245,14 @@ function getInfo() {
                     displayText("userShare", '-')
 
                     // 用户不存在禁止提现/继续游戏
-                    disableButton("withdrawButton");
-                    disableButton("continueButton");
+                    disableButton("withdrawButton", getWord("insufficientWithdrawalBalanceLang"));
+                    disableButton("continueButton", getWord("insufficientGameBalanceLang"));
 
                     // 用户不存在禁止分红
-                    disableButton("dividendButton");
+                    disableButton("dividendButton", getWord("dividendConditionsNotMetLang"));
 
                     // 用户不存在禁止邀请
-                    disableButton("inviteButton");
+                    disableButton("inviteButton", getWord("cannotInviteWithoutJoiningGameLang"));
                     document.getElementById('inviteURL').value = "";
                 }
             })
@@ -360,6 +363,11 @@ if (window.ethereum) {
         });
 
     window.ethereum.on("accountsChanged", function (accounts) {
+        enableButton("withdrawButton");
+        enableButton("continueButton");
+        enableButton("dividendButton");
+        enableButton("inviteButton");
+
         getInfo();
         checkBalanceLoop();
     });

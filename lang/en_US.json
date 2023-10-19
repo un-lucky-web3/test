@@ -57,5 +57,10 @@
   "成功投入游戏，并获得了奖励": "Successfully entered the game and received rewards",
   "操作失败": "Operation Failed",
   "zh-CN": "en-US",
-  "数值为每个用户的参与金额和钱包地址。触发游戏结束的用户，如果是倒霉蛋，那么将会获得2倍的股份。": "The value is each user’s participation amount and wallet address. If the user who triggers the end of the game is unlucky, he will receive 2 times the shares."
+  "数值为每个用户的参与金额和钱包地址。触发游戏结束的用户，如果是倒霉蛋，那么将会获得2倍的股份。": "The value is each user’s participation amount and wallet address. If the user who triggers the end of the game is unlucky, he will receive 2 times the shares.",
+  "钱包余额不足0.01以太坊": "Wallet balance is less than 0.01 ETH",
+  "余额不足以提现": "Insufficient balance for withdrawal",
+  "余额不足以继续参与游戏": "Insufficient balance to continue playing the game",
+  "不满足分红条件": "Dividend conditions not met",
+  "未加入游戏无法邀请他人": "Cannot invite others without joining the game"
 }
