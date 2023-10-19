@@ -194,8 +194,9 @@ function disableButton(name, txt) {
 }
 
 function enableButton(name, func) {
-    document.getElementById(name).onclick = func;
-    document.getElementById(name).classList.remove("disabled");
+    const button = document.getElementById(name);
+    button.onclick = func;
+    button.classList.remove("disabled");
     button.title = "";
 }
 
