@@ -175,7 +175,17 @@ function getInfo() {
                     displayText("balance", web3.utils.fromWei(user.balance, 'ether'))
                     displayText("userShare", web3.utils.fromWei(user.shares, 'ether'))
                     var currentURLWithoutParams = window.location.origin + window.location.pathname;
-                    document.getElementById('inviteURL').value = currentURLWithoutParams + '?inviter=' + accounts[0]
+                    document.getElementById('inviteURL').value = currentURLWithoutParams + '?inviter=' + accounts[0];
+
+                    var currentTime = Math.floor(Date.now() / 1000);
+                    var daysDifference = (currentTime - user.lastDividendTime) / (60 * 60 * 24);
+                    if (daysDifference < 30) {
+                        document.getElementById("dividendButton").onclick = null;
+                        document.getElementById("dividendButton").classList.add("disabled");
+                    } else {
+                        document.getElementById("dividendButton").onclick = claimDividend;
+                        document.getElementById("dividendButton").classList.remove("disabled");
+                    }
                 } else {
                     displayText("balance", '-')
                     displayText("userShare", '-')
