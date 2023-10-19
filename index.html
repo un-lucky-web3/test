@@ -11,6 +11,7 @@
    <script src="https://unpkg.com/web3@1.5.2/dist/web3.min.js"></script>
    <script src="lang.js"></script>
    <script src="/js/info.js"></script>
+   <script src="/js/bignumber.min.js"></script>
    <script src="/js/op.js"></script>
 
 </head>
@@ -164,7 +165,7 @@
          <div class="box">
             <div class="box-title">{{邀请}}</div>
             <input id="inviteURL" value="https://un-lucky.com" disabled>
-            <div class="button" onclick="copyInviteUrl();">{{复制邀请链接}}</div>
+            <div id="inviteButton" class="button" onclick="copyInviteUrl();">{{复制邀请链接}}</div>
             <div class="tips">
                {{通过你的邀请链接进行游戏的玩家充值金额的3%会赠予给你。}}
             </div>

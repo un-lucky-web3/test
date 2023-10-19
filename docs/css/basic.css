@@ -258,6 +258,7 @@ textarea::placeholder {
 }
 
 .button {
+  position: relative;
   padding: 15px;
   border: 2px solid rgba(255, 141, 217, 0.81);
   box-shadow: 0 0 0px #ffffff;
@@ -289,6 +290,16 @@ textarea::placeholder {
   background-color: inherit;
 }
 
+.button.disabled::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, transparent 48%, rgba(255, 141, 217, 0.81) 48%, rgba(255, 141, 217, 0.81) 52%, transparent 52%);
+  pointer-events: none;
+}
 
 .buttons {
   display: flex;

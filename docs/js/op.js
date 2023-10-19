@@ -1,9 +1,30 @@
 // 全局变量
 let contract;
+const minRechargeAmount = new BigNumber(1e16);
+const zeroAmount = new BigNumber(0);
 
 global = {
     user: {}
 };
+
+async function checkBalance(account) {
+    const balanceWei = await web3.eth.getBalance(account);
+    const balance = new BigNumber(balanceWei);
+
+    console.log(balance.toString());
+
+    if (balance.comparedTo(minRechargeAmount) < 0) {
+        disableButton("rechargeButton");
+    } else {
+        enableButton("rechargeButton", recharge);
+    }
+}
+
+function checkBalanceLoop() {
+    web3.eth.getAccounts().then(accounts => {
+        checkBalance(accounts[0]);
+    });
+}
 
 function displayText(id, text) {
     if (text.then) {
@@ -16,9 +37,11 @@ function displayText(id, text) {
 // 初始化应用
 function initializeApp() {
     contract = new web3.eth.Contract(contractABI, contractAddress);
-    getInfo()
+    getInfo();
+    checkBalanceLoop();
     setInterval(() => {
         getInfo();
+        checkBalanceLoop();
     }, 10000);
 }
 
@@ -131,7 +154,7 @@ function donate() {
         contract.methods.sponsor().send({ from: accounts[0], value: web3.utils.toWei(amountInEther, 'ether') }).then(() => {
             alert(getWord('donateSuccessLang'));
         }).catch((error) => {
-            alert(getWord('donateFailureLang') + ':' + error);
+            alert(getWord('donateFailureLang'));
         }).finally(() => {
             donateButton.style.visibility = 'visible';
         })
@@ -163,6 +186,16 @@ function copyInviteUrl() {
     setTimeout(() => { alert(getWord('copySuccessLang')); }, 150);
 }
 
+function disableButton(name) {
+    document.getElementById(name).onclick = null;
+    document.getElementById(name).classList.add("disabled");
+}
+
+function enableButton(name, func) {
+    document.getElementById(name).onclick = func;
+    document.getElementById(name).classList.remove("disabled");
+}
+
 // 获取用户信息
 function getInfo() {
     web3.eth.getAccounts().then(accounts => {
@@ -172,24 +205,52 @@ function getInfo() {
                 global.user = user
                 displayText("address", accounts[0].substr(0, 6) + '***' + accounts[0].substr(39, 3))
                 if (user.exist) {
+                    var balance = new BigNumber(user.balance);
+                    var shares = new BigNumber(user.shares);
                     displayText("balance", web3.utils.fromWei(user.balance, 'ether'))
                     displayText("userShare", web3.utils.fromWei(user.shares, 'ether'))
                     var currentURLWithoutParams = window.location.origin + window.location.pathname;
                     document.getElementById('inviteURL').value = currentURLWithoutParams + '?inviter=' + accounts[0];
 
+                    // 用户余额为0禁止提现
+                    if (balance.comparedTo(zeroAmount) === 0) {
+                        disableButton("withdrawButton");
+                    } else {
+                        enableButton("withdrawButton", withdraw);
+                    }
+
+                    // 用户余额小于0.01禁止继续游戏
+                    if (balance.comparedTo(minRechargeAmount) < 0) {
+                        disableButton("continueButton");
+                    } else {
+                        enableButton("continueButton", continueGame);
+                    }
+
                     // 距离上一次分红超过30天才能再次申请分红
                     var currentTime = Math.floor(Date.now() / 1000);
                     var daysDifference = (currentTime - user.lastDividendTime) / (60 * 60 * 24);
-                    if (daysDifference < 30) {
-                        document.getElementById("dividendButton").onclick = null;
-                        document.getElementById("dividendButton").classList.add("disabled");
+                    if (daysDifference < 30 || shares.comparedTo(zeroAmount) === 0) {
+                        disableButton("dividendButton");
                     } else {
-                        document.getElementById("dividendButton").onclick = claimDividend;
-                        document.getElementById("dividendButton").classList.remove("disabled");
+                        enableButton("dividendButton", claimDividend);
                     }
+
+                    // 允许邀请
+                    enableButton("inviteButton", copyInviteUrl);
                 } else {
                     displayText("balance", '-')
                     displayText("userShare", '-')
+
+                    // 用户不存在禁止提现/继续游戏
+                    disableButton("withdrawButton");
+                    disableButton("continueButton");
+
+                    // 用户不存在禁止分红
+                    disableButton("dividendButton");
+
+                    // 用户不存在禁止邀请
+                    disableButton("inviteButton");
+                    document.getElementById('inviteURL').value = "";
                 }
             })
             .catch((error) => {
@@ -300,6 +361,7 @@ if (window.ethereum) {
 
     window.ethereum.on("accountsChanged", function (accounts) {
         getInfo();
+        checkBalanceLoop();
     });
 } else {
     alert(getWord('installWalletLang'));
