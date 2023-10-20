@@ -336,7 +336,7 @@ async function switchNetwork() {
                                 symbol: 'ETH',
                                 decimals: 18,
                             },
-                            rpcUrls: ['https://un-lucky.com/arbitrum'],
+                            rpcUrls: ['https://arb1.arbitrum.io/rpc'],
                             blockExplorerUrls: ['https://arbiscan.io'],
                         },
                     ],
