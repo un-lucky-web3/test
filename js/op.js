@@ -188,16 +188,14 @@ function copyInviteUrl() {
 
 function disableButton(name, txt) {
     const button = document.getElementById(name);
-    button.onclick = null;
-    button.classList.add("disabled");
-    button.title = txt === undefined ? "" : txt;
+    button.onclick = function () {
+        alert(txt);
+    };
 }
 
 function enableButton(name, func) {
     const button = document.getElementById(name);
     button.onclick = func;
-    button.classList.remove("disabled");
-    button.title = "";
 }
 
 // 获取用户信息
