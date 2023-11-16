@@ -261,7 +261,7 @@ function getInfo() {
 
                 contract.methods.currentGameInfo().call().then((info) => {
                     if (info) {
-                        displayText("startTime", new Date(info.startTimestamp * 1000).toLocaleString());
+                        displayText("startTime", new Date(Number(info.startTimestamp) * 1000).toLocaleString());
                         displayText("currentRound", parseInt(info.currentRound));
                     }
                 })
