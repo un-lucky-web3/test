@@ -21,7 +21,7 @@ var languages = {
     installWalletLang: "Please Install MetaMask or Other Compatible Wallet First",
     copySuccessLang: "Copy Successful",
 
-    insufficientWalletBalanceLang: "Wallet balance is less than 0.01 ETH",
+    insufficientWalletBalanceLang: "Insufficient wallet balance",
     insufficientWithdrawalBalanceLang: "Insufficient balance for withdrawal",
     insufficientGameBalanceLang: "Insufficient balance to continue playing the game",
     dividendConditionsNotMetLang: "Dividend conditions not met",

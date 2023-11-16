@@ -21,7 +21,7 @@ var languages = {
     installWalletLang: "請先安裝MetaMask或其他兼容的錢包",
     copySuccessLang: "複製成功",
 
-    insufficientWalletBalanceLang: "錢包餘額不足0.01以太幣",
+    insufficientWalletBalanceLang: "錢包餘額不足",
     insufficientWithdrawalBalanceLang: "餘額不足以提現",
     insufficientGameBalanceLang: "餘額不足以繼續參與遊戲",
     dividendConditionsNotMetLang: "不滿足分紅條件",

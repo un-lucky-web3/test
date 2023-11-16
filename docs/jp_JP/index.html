@@ -72,125 +72,130 @@
                <div class="sec-3-money sec-3-m-r icon"></div>
                <div class="sec-3-lucky icon"></div>
                <div class="sec-3-unlucky icon"></div>
-
             </div>
          </div>
       </div>
 
-      <div class="title">
-         ゲームデータ
+      <div class="connect-wallet" id="connectWallet">
+         <div class="button" onclick="connectWallet();">ウォレットを接続する - Arbitrum One ネットワーク</div>
       </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">分配待ち総額</div>
-            <div id="totalDividendAmount"></div>
+
+      <div class="game-info" id="gameInfo">
+         <div class="title">
+            ゲームデータ
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">プレイヤー総数</div>
-            <div id="totalPlays">------</div>
-         </div>
-         <div class="box">
-            <div class="box-title">総株式</div>
-            <div id="totalShares">------</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">開始時間</div>
-            <div id="startTime">---------- --:--:--</div>
-         </div>
-         <div class="box">
-            <div class="box-title">現在のラウンド</div>
-            <div id="currentRound">----</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">今回のゲーム参加者</div>
-            <div id="players">
-            </div>
-            <div class="tips">
-               値は各ユーザーの参加額とウォレットアドレスです。 ゲームの終了を引き起こしたユーザーが運が悪い場合、そのユーザーは 2 倍のシェアを受け取ります。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">分配待ち総額</div>
+               <div id="totalDividendAmount"></div>
             </div>
          </div>
-      </div>
-      <div class="title">
-         コントロールパネル
-      </div>
-      <div class="panels">
-         <!-- 充值，邀请，提现。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">プレイヤー総数</div>
+               <div id="totalPlays">------</div>
+            </div>
+            <div class="box">
+               <div class="box-title">総株式</div>
+               <div id="totalShares">------</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">開始時間</div>
+               <div id="startTime">---------- --:--:--</div>
+            </div>
+            <div class="box">
+               <div class="box-title">現在のラウンド</div>
+               <div id="currentRound">----</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">今回のゲーム参加者</div>
+               <div id="players">
+               </div>
+               <div class="tips">
+                  値は各ユーザーの参加額とウォレットアドレスです。 ゲームの終了を引き起こしたユーザーが運が悪い場合、そのユーザーは 2 倍のシェアを受け取ります。
+               </div>
+            </div>
+         </div>
+         <div class="title">
+            コントロールパネル
+         </div>
+         <div class="panels">
+            <!-- 充值，邀请，提现。
          余额，账户名，状态，记录，股权信息。 -->
-         <div class="box">
-            <div class="box-title">ウォレット</div>
-            <div>接続されたウォレットアドレス: <span id="address"></span></div>
-            <div>
-               残高: <span id="balance"></span>
+            <div class="box">
+               <div class="box-title">ウォレット</div>
+               <div>接続されたウォレットアドレス: <span id="address"></span></div>
+               <div>
+                  残高: <span id="balance"></span>
+               </div>
+               <div class="buttons">
+                  <div id="withdrawButton" class="button" onclick="withdraw();">引き出し</div>
+                  <div id="continueButton" class="button" onclick="continueGame();">ゲームへの投資</div>
+               </div>
+               <div class="tips">
+                  残高をゲームに再投資すると、残高の10％の株式が追加で付与されます！
+               </div>
             </div>
-            <div class="buttons">
-               <div id="withdrawButton" class="button" onclick="withdraw();">引き出し</div>
-               <div id="continueButton" class="button" onclick="continueGame();">ゲームへの投資</div>
-            </div>
-            <div class="tips">
-               残高をゲームに再投資すると、残高の10％の株式が追加で付与されます！
-            </div>
-         </div>
-         <div class="box">
-            <div class="box-title">チャージ</div>
-            <input id="inviter" placeholder="招待者" />
-            <div class="eth">
-               <input id="rechargeAmount" placeholder="金額" />
-            </div>
-            <div id="rechargeButton" class="button" onclick="recharge();">チャージ</div>
-            <div class="tips">
-               チャージ金額は自動的に現在のラウンドのゲームに参加し、同じラウンドのゲームに複数回チャージすることができます。招待人を入力すると、チャージ金額の3％が招待人に贈られます。それ以外の場合、4％が運営費用に寄付されます。
-            </div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">株権</div>
-            <div>
-               株式所有: <span id="userShare"></span>
-            </div>
-            <div>
-               比率: <span id="shareRatio"></span>%
-            </div>
-            <div id="dividendButton" class="button" onclick="claimDividend();">配当申請</div>
-            <div class="tips">
-               すべてのプレイヤーは30日ごとに分配申請を自分で行うことができます。配当待ち総額からあなたの株式の割合に応じた金額を受け取ります。
+            <div class="box">
+               <div class="box-title">チャージ</div>
+               <input id="inviter" placeholder="招待者" />
+               <div class="eth">
+                  <input id="rechargeAmount" placeholder="金額" />
+               </div>
+               <div id="rechargeButton" class="button" onclick="recharge();">チャージ</div>
+               <div class="tips">
+                  チャージ金額は自動的に現在のラウンドのゲームに参加し、同じラウンドのゲームに複数回チャージすることができます。招待人を入力すると、チャージ金額の3％が招待人に贈られます。それ以外の場合、4％が運営費用に寄付されます。
+               </div>
             </div>
          </div>
-         <div class="box">
-            <div class="box-title">招待</div>
-            <input id="inviteURL" value="https://un-lucky.com" disabled>
-            <div id="inviteButton" class="button" onclick="copyInviteUrl();">招待リンクをコピー</div>
-            <div class="tips">
-               あなたの招待リンクを介してゲームに参加するプレイヤーのチャージ金額の3％があなたに贈られます。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">株権</div>
+               <div>
+                  株式所有: <span id="userShare"></span>
+               </div>
+               <div>
+                  比率: <span id="shareRatio"></span>%
+               </div>
+               <div id="dividendButton" class="button" onclick="claimDividend();">配当申請</div>
+               <div class="tips">
+                  すべてのプレイヤーは30日ごとに分配申請を自分で行うことができます。配当待ち総額からあなたの株式の割合に応じた金額を受け取ります。
+               </div>
+            </div>
+            <div class="box">
+               <div class="box-title">招待</div>
+               <input id="inviteURL" value="https://un-lucky.com" disabled>
+               <div id="inviteButton" class="button" onclick="copyInviteUrl();">招待リンクをコピー</div>
+               <div class="tips">
+                  あなたの招待リンクを介してゲームに参加するプレイヤーのチャージ金額の3％があなたに贈られます。
+               </div>
             </div>
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">寄付</div>
-            <div class="eth">
-               <input id="donateAmount" value="0.01">
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">寄付</div>
+               <div class="eth">
+                  <input id="donateAmount" value="0.01">
+               </div>
+               <div id="donateButton" class="button" onclick="donate();">寄付</div>
+               <div class="tips">
+                  一定額をコミュニティに寄付し、150％の株式を受け取ることができます。
+               </div>
             </div>
-            <div id="donateButton" class="button" onclick="donate();">寄付</div>
-            <div class="tips">
-               一定額をコミュニティに寄付し、150％の株式を受け取ることができます。
+            <div class="box">
+               <div class="box-title">エアドロップ</div>
+               <textarea id="airdropCode" value=""></textarea>
+               <div id="airdropButton" class="button" onclick="airdrop();">エアドロップの受け取り</div>
+               <div class="tips">
+                  コミュニティをフォローすると、エアドロップ引き換えコードを取得でき、0.1ETH 株と引き換えることができます。
+               </div>
             </div>
-         </div>
-         <div class="box">
-            <div class="box-title">エアドロップ</div>
-            <textarea id="airdropCode" value=""></textarea>
-            <div id="airdropButton" class="button" onclick="airdrop();">エアドロップの受け取り</div>
-            <div class="tips">
-               コミュニティをフォローすると、エアドロップ引き換えコードを取得でき、0.1ETH 株と引き換えることができます。
-            </div>
-         </div>
 
+         </div>
       </div>
    </div>
    <div class="container footer">

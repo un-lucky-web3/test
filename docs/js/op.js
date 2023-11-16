@@ -7,25 +7,6 @@ global = {
     user: {}
 };
 
-async function checkBalance(account) {
-    const balanceWei = await web3.eth.getBalance(account);
-    const balance = new BigNumber(balanceWei);
-
-    console.log(balance.toString());
-
-    if (balance.comparedTo(minRechargeAmount) < 0) {
-        disableButton("rechargeButton", getWord("insufficientWalletBalanceLang"));
-    } else {
-        enableButton("rechargeButton", recharge);
-    }
-}
-
-function checkBalanceLoop() {
-    web3.eth.getAccounts().then(accounts => {
-        checkBalance(accounts[0]);
-    });
-}
-
 function displayText(id, text) {
     if (text.then) {
         text.then(
@@ -38,10 +19,8 @@ function displayText(id, text) {
 function initializeApp() {
     contract = new web3.eth.Contract(contractABI, contractAddress);
     getInfo();
-    checkBalanceLoop();
     setInterval(() => {
         getInfo();
-        checkBalanceLoop();
     }, 10000);
 }
 
@@ -63,7 +42,18 @@ function recharge() {
     // 禁用充值按钮
     rechargeButton.style.visibility = 'hidden';
 
-    web3.eth.getAccounts().then(accounts => {
+    web3.eth.getAccounts().then(async accounts => {
+        const balanceWei = await web3.eth.getBalance(accounts[0]);
+        const balance = new BigNumber(balanceWei);
+
+        if (balance.comparedTo(amountInWei) < 0) {
+            alert(getWord("insufficientWalletBalanceLang"));
+
+            rechargeButton.style.visibility = 'visible';
+            rechargeButton.title = "";
+            return;
+        }
+
         contract.methods.recharge(inviter).send({ from: accounts[0], value: amountInWei })
             .then(() => {
                 alert(getWord('rechargeSuccessLang'));
@@ -203,7 +193,6 @@ function getInfo() {
     web3.eth.getAccounts().then(accounts => {
         contract.methods.getUserInfo().call({ from: accounts[0] })
             .then((user) => {
-                console.log(user);
                 global.user = user
                 displayText("address", accounts[0].substr(0, 6) + '***' + accounts[0].substr(39, 3))
                 if (user.exist) {
@@ -259,7 +248,6 @@ function getInfo() {
                 console.error(getWord('getUserInfoFailureLang'), error);
             })
             .finally(() => {
-
                 contract.methods.totalDividendAmount().call().then((totalBalance) => {
                     displayText("totalDividendAmount", web3.utils.fromWei(totalBalance, 'ether'));
                 });
@@ -267,7 +255,6 @@ function getInfo() {
                 displayText("totalPlays", contract.methods.userTotalCount().call());
                 contract.methods.totalShares().call().then((totalShares) => {
                     displayText("totalShares", web3.utils.fromWei(totalShares, 'ether'));
-                    console.log(123, totalShares)
                     if (totalShares)
                         displayText("shareRatio", (global.user.shares / parseInt(totalShares) * 100).toFixed(6));
                 })
@@ -348,28 +335,71 @@ async function switchNetwork() {
     }
 }
 
-// 检查window.ethereum并连接钱包
-if (window.ethereum) {
-    window.web3 = new Web3(window.ethereum);
-    window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then(() => {
-            initializeApp();
-            switchNetwork();
-        })
-        .catch((error) => {
-            console.log(error)
-            alert(getWord('connectWalletLang'));
+function unconnect() {
+    document.getElementById("gameInfo").style.display = "none";
+    document.getElementById("connectWallet").style.display = "flex";
+}
+
+function connected() {
+    document.getElementById("connectWallet").style.display = "none";
+    document.getElementById("gameInfo").style.display = "block";
+}
+
+function connectWallet() {
+    // 检查window.ethereum并连接钱包
+    if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        window.ethereum.request({ method: 'eth_requestAccounts' })
+            .then(() => {
+                switchNetwork();
+                initializeApp();
+                connected();
+            })
+            .catch((error) => {
+                // console.log(error)
+                unconnect();
+                alert(getWord('connectWalletLang'));
+            });
+
+        window.ethereum.on("accountsChanged", function (accounts) {
+            enableButton("withdrawButton");
+            enableButton("continueButton");
+            enableButton("dividendButton");
+            enableButton("inviteButton");
+
+            getInfo();
         });
+    } else {
+        unconnect();
+        alert(getWord('installWalletLang'));
+    }
+}
 
-    window.ethereum.on("accountsChanged", function (accounts) {
-        enableButton("withdrawButton");
-        enableButton("continueButton");
-        enableButton("dividendButton");
-        enableButton("inviteButton");
+window.addEventListener('load', checkWalletConnection);
 
-        getInfo();
-        checkBalanceLoop();
-    });
-} else {
-    alert(getWord('installWalletLang'));
+async function checkWalletConnection() {
+    if (window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length > 0) {
+            // 钱包已连接
+            connected();
+            window.web3 = new Web3(window.ethereum);
+            window.ethereum.request({ method: 'eth_requestAccounts' })
+                .then(() => {
+                    initializeApp();
+                    switchNetwork();
+                    connected();
+                })
+                .catch((error) => {
+                    unconnect();
+                    alert(getWord('connectWalletLang'));
+                });
+        } else {
+            // 钱包未连接
+            unconnect();
+        }
+    } else {
+        // 未检测到ethereum对象
+        unconnect();
+    }
 }

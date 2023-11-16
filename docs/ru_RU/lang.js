@@ -21,7 +21,7 @@ var languages = {
     installWalletLang: "Пожалуйста, установите MetaMask или другой совместимый кошелек",
     copySuccessLang: "Копирование успешно",
 
-    insufficientWalletBalanceLang: "Баланс кошелька меньше 0.01 эфира",
+    insufficientWalletBalanceLang: "Недостаточно средств на балансе кошелька",
     insufficientWithdrawalBalanceLang: "Недостаточно средств для вывода",
     insufficientGameBalanceLang: "Недостаточно средств для продолжения игры",
     dividendConditionsNotMetLang: "Не удовлетворяют условиям дивидендов",

@@ -72,125 +72,130 @@
                <div class="sec-3-money sec-3-m-r icon"></div>
                <div class="sec-3-lucky icon"></div>
                <div class="sec-3-unlucky icon"></div>
-
             </div>
          </div>
       </div>
 
-      <div class="title">
-         遊戲數據
+      <div class="connect-wallet" id="connectWallet">
+         <div class="button" onclick="connectWallet();">連接錢包 - Arbitrum One 網絡</div>
       </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">待分紅總額</div>
-            <div id="totalDividendAmount"></div>
+
+      <div class="game-info" id="gameInfo">
+         <div class="title">
+            遊戲數據
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">玩家總量</div>
-            <div id="totalPlays">------</div>
-         </div>
-         <div class="box">
-            <div class="box-title">總股份</div>
-            <div id="totalShares">------</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">開始時間</div>
-            <div id="startTime">---------- --:--:--</div>
-         </div>
-         <div class="box">
-            <div class="box-title">當前回合</div>
-            <div id="currentRound">----</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">本回合遊戲參與人</div>
-            <div id="players">
-            </div>
-            <div class="tips">
-               數值為每個用戶的參與金額和錢包地址。 觸發遊戲結束的用戶，如果是倒楣蛋，那麼將會獲得2倍的股份。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">待分紅總額</div>
+               <div id="totalDividendAmount"></div>
             </div>
          </div>
-      </div>
-      <div class="title">
-         控制面板
-      </div>
-      <div class="panels">
-         <!-- 充值，邀请，提现。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">玩家總量</div>
+               <div id="totalPlays">------</div>
+            </div>
+            <div class="box">
+               <div class="box-title">總股份</div>
+               <div id="totalShares">------</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">開始時間</div>
+               <div id="startTime">---------- --:--:--</div>
+            </div>
+            <div class="box">
+               <div class="box-title">當前回合</div>
+               <div id="currentRound">----</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">本回合遊戲參與人</div>
+               <div id="players">
+               </div>
+               <div class="tips">
+                  數值為每個用戶的參與金額和錢包地址。 觸發遊戲結束的用戶，如果是倒楣蛋，那麼將會獲得2倍的股份。
+               </div>
+            </div>
+         </div>
+         <div class="title">
+            控制面板
+         </div>
+         <div class="panels">
+            <!-- 充值，邀请，提现。
          余额，账户名，状态，记录，股权信息。 -->
-         <div class="box">
-            <div class="box-title">錢包</div>
-            <div>已連接錢包地址: <span id="address"></span></div>
-            <div>
-               餘額: <span id="balance"></span>
+            <div class="box">
+               <div class="box-title">錢包</div>
+               <div>已連接錢包地址: <span id="address"></span></div>
+               <div>
+                  餘額: <span id="balance"></span>
+               </div>
+               <div class="buttons">
+                  <div id="withdrawButton" class="button" onclick="withdraw();">提現</div>
+                  <div id="continueButton" class="button" onclick="continueGame();">投入遊戲</div>
+               </div>
+               <div class="tips">
+                  將餘額重新投入遊戲，會額外獎勵餘額10%的股份！
+               </div>
             </div>
-            <div class="buttons">
-               <div id="withdrawButton" class="button" onclick="withdraw();">提現</div>
-               <div id="continueButton" class="button" onclick="continueGame();">投入遊戲</div>
-            </div>
-            <div class="tips">
-               將餘額重新投入遊戲，會額外獎勵餘額10%的股份！
-            </div>
-         </div>
-         <div class="box">
-            <div class="box-title">充值</div>
-            <input id="inviter" placeholder="邀請人" />
-            <div class="eth">
-               <input id="rechargeAmount" placeholder="金額" />
-            </div>
-            <div id="rechargeButton" class="button" onclick="recharge();">充值</div>
-            <div class="tips">
-               充值金額將自動參與本輪遊戲，可以多次充值同一輪遊戲。填寫邀請人，會將充值金額的3%贈予邀請人。否則會將4%捐贈給運營費用。
-            </div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">股權</div>
-            <div>
-               擁有股份: <span id="userShare"></span>
-            </div>
-            <div>
-               佔比: <span id="shareRatio"></span>%
-            </div>
-            <div id="dividendButton" class="button" onclick="claimDividend();">申請分紅</div>
-            <div class="tips">
-               所有玩家每30天可以主動申請一次分紅。會獲得待分紅總額中你的股份佔比的金額。
+            <div class="box">
+               <div class="box-title">充值</div>
+               <input id="inviter" placeholder="邀請人" />
+               <div class="eth">
+                  <input id="rechargeAmount" placeholder="金額" />
+               </div>
+               <div id="rechargeButton" class="button" onclick="recharge();">充值</div>
+               <div class="tips">
+                  充值金額將自動參與本輪遊戲，可以多次充值同一輪遊戲。填寫邀請人，會將充值金額的3%贈予邀請人。否則會將4%捐贈給運營費用。
+               </div>
             </div>
          </div>
-         <div class="box">
-            <div class="box-title">邀請</div>
-            <input id="inviteURL" value="https://un-lucky.com" disabled>
-            <div id="inviteButton" class="button" onclick="copyInviteUrl();">複製邀請鏈接</div>
-            <div class="tips">
-               通過你的邀請鏈接進行遊戲的玩家充值金額的3%會贈予給你。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">股權</div>
+               <div>
+                  擁有股份: <span id="userShare"></span>
+               </div>
+               <div>
+                  佔比: <span id="shareRatio"></span>%
+               </div>
+               <div id="dividendButton" class="button" onclick="claimDividend();">申請分紅</div>
+               <div class="tips">
+                  所有玩家每30天可以主動申請一次分紅。會獲得待分紅總額中你的股份佔比的金額。
+               </div>
+            </div>
+            <div class="box">
+               <div class="box-title">邀請</div>
+               <input id="inviteURL" value="https://un-lucky.com" disabled>
+               <div id="inviteButton" class="button" onclick="copyInviteUrl();">複製邀請鏈接</div>
+               <div class="tips">
+                  通過你的邀請鏈接進行遊戲的玩家充值金額的3%會贈予給你。
+               </div>
             </div>
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">捐贈</div>
-            <div class="eth">
-               <input id="donateAmount" value="0.01">
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">捐贈</div>
+               <div class="eth">
+                  <input id="donateAmount" value="0.01">
+               </div>
+               <div id="donateButton" class="button" onclick="donate();">捐贈</div>
+               <div class="tips">
+                  你可以捐贈給社區一定金額，並獲得150%的股份。
+               </div>
             </div>
-            <div id="donateButton" class="button" onclick="donate();">捐贈</div>
-            <div class="tips">
-               你可以捐贈給社區一定金額，並獲得150%的股份。
+            <div class="box">
+               <div class="box-title">空投</div>
+               <textarea id="airdropCode" value=""></textarea>
+               <div id="airdropButton" class="button" onclick="airdrop();">領取空投</div>
+               <div class="tips">
+                  你可以關注社區，獲得空投兌換碼，可以兌換0.1ETH的股份。
+               </div>
             </div>
-         </div>
-         <div class="box">
-            <div class="box-title">空投</div>
-            <textarea id="airdropCode" value=""></textarea>
-            <div id="airdropButton" class="button" onclick="airdrop();">領取空投</div>
-            <div class="tips">
-               你可以關注社區，獲得空投兌換碼，可以兌換0.1ETH的股份。
-            </div>
-         </div>
 
+         </div>
       </div>
    </div>
    <div class="container footer">

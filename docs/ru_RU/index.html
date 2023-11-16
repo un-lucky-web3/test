@@ -72,125 +72,130 @@
                <div class="sec-3-money sec-3-m-r icon"></div>
                <div class="sec-3-lucky icon"></div>
                <div class="sec-3-unlucky icon"></div>
-
             </div>
          </div>
       </div>
 
-      <div class="title">
-         Игровые данные
+      <div class="connect-wallet" id="connectWallet">
+         <div class="button" onclick="connectWallet();">Подключить кошелек - Arbitrum One сеть</div>
       </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Общая сумма ожидаемых дивидендов</div>
-            <div id="totalDividendAmount"></div>
+
+      <div class="game-info" id="gameInfo">
+         <div class="title">
+            Игровые данные
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Общее количество игроков</div>
-            <div id="totalPlays">------</div>
-         </div>
-         <div class="box">
-            <div class="box-title">Общий объем акций</div>
-            <div id="totalShares">------</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Время начала</div>
-            <div id="startTime">---------- --:--:--</div>
-         </div>
-         <div class="box">
-            <div class="box-title">Текущий раунд</div>
-            <div id="currentRound">----</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Участники текущего раунда</div>
-            <div id="players">
-            </div>
-            <div class="tips">
-               Значением является сумма участия и адрес кошелька каждого пользователя. Если пользователю, инициировавшем окончание игры, не повезет, он получит в 2 раза больше акций.
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Общая сумма ожидаемых дивидендов</div>
+               <div id="totalDividendAmount"></div>
             </div>
          </div>
-      </div>
-      <div class="title">
-         Панель управления
-      </div>
-      <div class="panels">
-         <!-- 充值，邀请，提现。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Общее количество игроков</div>
+               <div id="totalPlays">------</div>
+            </div>
+            <div class="box">
+               <div class="box-title">Общий объем акций</div>
+               <div id="totalShares">------</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Время начала</div>
+               <div id="startTime">---------- --:--:--</div>
+            </div>
+            <div class="box">
+               <div class="box-title">Текущий раунд</div>
+               <div id="currentRound">----</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Участники текущего раунда</div>
+               <div id="players">
+               </div>
+               <div class="tips">
+                  Значением является сумма участия и адрес кошелька каждого пользователя. Если пользователю, инициировавшем окончание игры, не повезет, он получит в 2 раза больше акций.
+               </div>
+            </div>
+         </div>
+         <div class="title">
+            Панель управления
+         </div>
+         <div class="panels">
+            <!-- 充值，邀请，提现。
          余额，账户名，状态，记录，股权信息。 -->
-         <div class="box">
-            <div class="box-title">Кошелек</div>
-            <div>Подключенные кошельки: <span id="address"></span></div>
-            <div>
-               Баланс: <span id="balance"></span>
+            <div class="box">
+               <div class="box-title">Кошелек</div>
+               <div>Подключенные кошельки: <span id="address"></span></div>
+               <div>
+                  Баланс: <span id="balance"></span>
+               </div>
+               <div class="buttons">
+                  <div id="withdrawButton" class="button" onclick="withdraw();">Вывести</div>
+                  <div id="continueButton" class="button" onclick="continueGame();">Участвовать в игре</div>
+               </div>
+               <div class="tips">
+                  Повторно вложить остаток на игру с бонусом в 10% акций!
+               </div>
             </div>
-            <div class="buttons">
-               <div id="withdrawButton" class="button" onclick="withdraw();">Вывести</div>
-               <div id="continueButton" class="button" onclick="continueGame();">Участвовать в игре</div>
-            </div>
-            <div class="tips">
-               Повторно вложить остаток на игру с бонусом в 10% акций!
-            </div>
-         </div>
-         <div class="box">
-            <div class="box-title">Пополнить</div>
-            <input id="inviter" placeholder="Пригласивший" />
-            <div class="eth">
-               <input id="rechargeAmount" placeholder="Сумма" />
-            </div>
-            <div id="rechargeButton" class="button" onclick="recharge();">Пополнить</div>
-            <div class="tips">
-               Сумма пополнения автоматически участвует в текущем раунде игры, вы можете многократно пополнять в том же раунде. Если вы укажете пригласившего, 3% от суммы пополнения будут переданы ему в качестве бонуса. В противном случае 4% будут пожертвованы на операционные расходы.
-            </div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Акции</div>
-            <div>
-               Владение акциями: <span id="userShare"></span>
-            </div>
-            <div>
-               Доля: <span id="shareRatio"></span>%
-            </div>
-            <div id="dividendButton" class="button" onclick="claimDividend();">Запросить дивиденды</div>
-            <div class="tips">
-               Каждый игрок может раз в 30 дней активно запрашивать дивиденды. Сумма будет зависеть от вашей доли в общей сумме ожидаемых дивидендов.
+            <div class="box">
+               <div class="box-title">Пополнить</div>
+               <input id="inviter" placeholder="Пригласивший" />
+               <div class="eth">
+                  <input id="rechargeAmount" placeholder="Сумма" />
+               </div>
+               <div id="rechargeButton" class="button" onclick="recharge();">Пополнить</div>
+               <div class="tips">
+                  Сумма пополнения автоматически участвует в текущем раунде игры, вы можете многократно пополнять в том же раунде. Если вы укажете пригласившего, 3% от суммы пополнения будут переданы ему в качестве бонуса. В противном случае 4% будут пожертвованы на операционные расходы.
+               </div>
             </div>
          </div>
-         <div class="box">
-            <div class="box-title">Пригласить</div>
-            <input id="inviteURL" value="https://un-lucky.com" disabled>
-            <div id="inviteButton" class="button" onclick="copyInviteUrl();">Копировать пригласительную ссылку</div>
-            <div class="tips">
-               Игроки, присоединившиеся к игре через вашу пригласительную ссылку, передадут вам 3% от суммы их пополнения.
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Акции</div>
+               <div>
+                  Владение акциями: <span id="userShare"></span>
+               </div>
+               <div>
+                  Доля: <span id="shareRatio"></span>%
+               </div>
+               <div id="dividendButton" class="button" onclick="claimDividend();">Запросить дивиденды</div>
+               <div class="tips">
+                  Каждый игрок может раз в 30 дней активно запрашивать дивиденды. Сумма будет зависеть от вашей доли в общей сумме ожидаемых дивидендов.
+               </div>
+            </div>
+            <div class="box">
+               <div class="box-title">Пригласить</div>
+               <input id="inviteURL" value="https://un-lucky.com" disabled>
+               <div id="inviteButton" class="button" onclick="copyInviteUrl();">Копировать пригласительную ссылку</div>
+               <div class="tips">
+                  Игроки, присоединившиеся к игре через вашу пригласительную ссылку, передадут вам 3% от суммы их пополнения.
+               </div>
             </div>
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">Пожертвовать</div>
-            <div class="eth">
-               <input id="donateAmount" value="0.01">
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">Пожертвовать</div>
+               <div class="eth">
+                  <input id="donateAmount" value="0.01">
+               </div>
+               <div id="donateButton" class="button" onclick="donate();">Пожертвовать</div>
+               <div class="tips">
+                  Вы можете сделать пожертвование определенной суммы в пользу сообщества и получить 150% акций.
+               </div>
             </div>
-            <div id="donateButton" class="button" onclick="donate();">Пожертвовать</div>
-            <div class="tips">
-               Вы можете сделать пожертвование определенной суммы в пользу сообщества и получить 150% акций.
+            <div class="box">
+               <div class="box-title">Бесплатная раздача</div>
+               <textarea id="airdropCode" value=""></textarea>
+               <div id="airdropButton" class="button" onclick="airdrop();">Получить бесплатную раздачу</div>
+               <div class="tips">
+                  Вы можете следить за сообществом и получать коды погашения Airdrop, которые можно обменять на акции по 0,1ETH.
+               </div>
             </div>
-         </div>
-         <div class="box">
-            <div class="box-title">Бесплатная раздача</div>
-            <textarea id="airdropCode" value=""></textarea>
-            <div id="airdropButton" class="button" onclick="airdrop();">Получить бесплатную раздачу</div>
-            <div class="tips">
-               Вы можете следить за сообществом и получать коды погашения Airdrop, которые можно обменять на акции по 0,1ETH.
-            </div>
-         </div>
 
+         </div>
       </div>
    </div>
    <div class="container footer">

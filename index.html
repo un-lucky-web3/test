@@ -72,125 +72,130 @@
                <div class="sec-3-money sec-3-m-r icon"></div>
                <div class="sec-3-lucky icon"></div>
                <div class="sec-3-unlucky icon"></div>
-
             </div>
          </div>
       </div>
 
-      <div class="title">
-         {{游戏数据}}
+      <div class="connect-wallet" id="connectWallet">
+         <div class="button" onclick="connectWallet();">{{连接钱包}}</div>
       </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{待分红总额}}</div>
-            <div id="totalDividendAmount"></div>
+
+      <div class="game-info" id="gameInfo">
+         <div class="title">
+            {{游戏数据}}
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{玩家总量}}</div>
-            <div id="totalPlays">------</div>
-         </div>
-         <div class="box">
-            <div class="box-title">{{总股份}}</div>
-            <div id="totalShares">------</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{开始时间}}</div>
-            <div id="startTime">---------- --:--:--</div>
-         </div>
-         <div class="box">
-            <div class="box-title">{{当前回合}}</div>
-            <div id="currentRound">----</div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{本回合游戏参与人}}</div>
-            <div id="players">
-            </div>
-            <div class="tips">
-               {{数值为每个用户的参与金额和钱包地址。触发游戏结束的用户，如果是倒霉蛋，那么将会获得2倍的股份。}}
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{待分红总额}}</div>
+               <div id="totalDividendAmount"></div>
             </div>
          </div>
-      </div>
-      <div class="title">
-         {{控制面板}}
-      </div>
-      <div class="panels">
-         <!-- 充值，邀请，提现。
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{玩家总量}}</div>
+               <div id="totalPlays">------</div>
+            </div>
+            <div class="box">
+               <div class="box-title">{{总股份}}</div>
+               <div id="totalShares">------</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{开始时间}}</div>
+               <div id="startTime">---------- --:--:--</div>
+            </div>
+            <div class="box">
+               <div class="box-title">{{当前回合}}</div>
+               <div id="currentRound">----</div>
+            </div>
+         </div>
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{本回合游戏参与人}}</div>
+               <div id="players">
+               </div>
+               <div class="tips">
+                  {{数值为每个用户的参与金额和钱包地址。触发游戏结束的用户，如果是倒霉蛋，那么将会获得2倍的股份。}}
+               </div>
+            </div>
+         </div>
+         <div class="title">
+            {{控制面板}}
+         </div>
+         <div class="panels">
+            <!-- 充值，邀请，提现。
          余额，账户名，状态，记录，股权信息。 -->
-         <div class="box">
-            <div class="box-title">{{钱包}}</div>
-            <div>{{已连接钱包地址}}: <span id="address"></span></div>
-            <div>
-               {{余额}}: <span id="balance"></span>
+            <div class="box">
+               <div class="box-title">{{钱包}}</div>
+               <div>{{已连接钱包地址}}: <span id="address"></span></div>
+               <div>
+                  {{余额}}: <span id="balance"></span>
+               </div>
+               <div class="buttons">
+                  <div id="withdrawButton" class="button" onclick="withdraw();">{{提现}}</div>
+                  <div id="continueButton" class="button" onclick="continueGame();">{{投入游戏}}</div>
+               </div>
+               <div class="tips">
+                  {{将余额重新投入游戏，会额外奖励余额10%的股份！}}
+               </div>
             </div>
-            <div class="buttons">
-               <div id="withdrawButton" class="button" onclick="withdraw();">{{提现}}</div>
-               <div id="continueButton" class="button" onclick="continueGame();">{{投入游戏}}</div>
-            </div>
-            <div class="tips">
-               {{将余额重新投入游戏，会额外奖励余额10%的股份！}}
-            </div>
-         </div>
-         <div class="box">
-            <div class="box-title">{{充值}}</div>
-            <input id="inviter" placeholder="{{邀请人}}" />
-            <div class="eth">
-               <input id="rechargeAmount" placeholder="{{金额}}" />
-            </div>
-            <div id="rechargeButton" class="button" onclick="recharge();">{{充值}}</div>
-            <div class="tips">
-               {{充值金额将自动参与本轮游戏，可以多次充值同一轮游戏。填写邀请人，会将充值金额的3%赠予邀请人。否则会将4%捐赠给运营费用。}}
-            </div>
-         </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{股权}}</div>
-            <div>
-               {{拥有股份}}: <span id="userShare"></span>
-            </div>
-            <div>
-               {{占比}}: <span id="shareRatio"></span>%
-            </div>
-            <div id="dividendButton" class="button" onclick="claimDividend();">{{申请分红}}</div>
-            <div class="tips">
-               {{所有玩家每30天可以主动申请一次分红。会获得待分红总额中你的股份占比的金额。}}
+            <div class="box">
+               <div class="box-title">{{充值}}</div>
+               <input id="inviter" placeholder="{{邀请人}}" />
+               <div class="eth">
+                  <input id="rechargeAmount" placeholder="{{金额}}" />
+               </div>
+               <div id="rechargeButton" class="button" onclick="recharge();">{{充值}}</div>
+               <div class="tips">
+                  {{充值金额将自动参与本轮游戏，可以多次充值同一轮游戏。填写邀请人，会将充值金额的3%赠予邀请人。否则会将4%捐赠给运营费用。}}
+               </div>
             </div>
          </div>
-         <div class="box">
-            <div class="box-title">{{邀请}}</div>
-            <input id="inviteURL" value="https://un-lucky.com" disabled>
-            <div id="inviteButton" class="button" onclick="copyInviteUrl();">{{复制邀请链接}}</div>
-            <div class="tips">
-               {{通过你的邀请链接进行游戏的玩家充值金额的3%会赠予给你。}}
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{股权}}</div>
+               <div>
+                  {{拥有股份}}: <span id="userShare"></span>
+               </div>
+               <div>
+                  {{占比}}: <span id="shareRatio"></span>%
+               </div>
+               <div id="dividendButton" class="button" onclick="claimDividend();">{{申请分红}}</div>
+               <div class="tips">
+                  {{所有玩家每30天可以主动申请一次分红。会获得待分红总额中你的股份占比的金额。}}
+               </div>
+            </div>
+            <div class="box">
+               <div class="box-title">{{邀请}}</div>
+               <input id="inviteURL" value="https://un-lucky.com" disabled>
+               <div id="inviteButton" class="button" onclick="copyInviteUrl();">{{复制邀请链接}}</div>
+               <div class="tips">
+                  {{通过你的邀请链接进行游戏的玩家充值金额的3%会赠予给你。}}
+               </div>
             </div>
          </div>
-      </div>
-      <div class="panels">
-         <div class="box">
-            <div class="box-title">{{捐赠}}</div>
-            <div class="eth">
-               <input id="donateAmount" value="0.01">
+         <div class="panels">
+            <div class="box">
+               <div class="box-title">{{捐赠}}</div>
+               <div class="eth">
+                  <input id="donateAmount" value="0.01">
+               </div>
+               <div id="donateButton" class="button" onclick="donate();">{{捐赠}}</div>
+               <div class="tips">
+                  {{你可以捐赠给社区一定金额，并获得150%的股份。}}
+               </div>
             </div>
-            <div id="donateButton" class="button" onclick="donate();">{{捐赠}}</div>
-            <div class="tips">
-               {{你可以捐赠给社区一定金额，并获得150%的股份。}}
+            <div class="box">
+               <div class="box-title">{{空投}}</div>
+               <textarea id="airdropCode" value=""></textarea>
+               <div id="airdropButton" class="button" onclick="airdrop();">{{领取空投}}</div>
+               <div class="tips">
+                  {{你可以关注社区，获得空投兑换码，可以兑换0.1ETH的股份。}}
+               </div>
             </div>
-         </div>
-         <div class="box">
-            <div class="box-title">{{空投}}</div>
-            <textarea id="airdropCode" value=""></textarea>
-            <div id="airdropButton" class="button" onclick="airdrop();">{{领取空投}}</div>
-            <div class="tips">
-               {{你可以关注社区，获得空投兑换码，可以兑换0.1ETH的股份。}}
-            </div>
-         </div>
 
+         </div>
       </div>
    </div>
    <div class="container footer">

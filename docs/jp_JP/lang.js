@@ -21,7 +21,7 @@ var languages = {
     installWalletLang: "まずMetaMaskまたは他の互換性のあるウォレットをインストールしてください",
     copySuccessLang: "コピー成功",
 
-    insufficientWalletBalanceLang: "ウォレットの残高は0.01イーサリアム以下です",
+    insufficientWalletBalanceLang: "ウォレットの残高不足",
     insufficientWithdrawalBalanceLang: "引き出しに必要な残高が足りません",
     insufficientGameBalanceLang: "ゲームを続けるには残高が足りません",
     dividendConditionsNotMetLang: "配当条件に適合していません",

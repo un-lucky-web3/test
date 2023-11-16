@@ -19,11 +19,13 @@ body {
   background-attachment: fixed;
   color: #333;
 }
+
 .ill-body {
   background: url(/p/bg.png);
   background-size: 400px 400px;
   background-position: center center;
 }
+
 a {
   color: white;
 }
@@ -326,6 +328,16 @@ textarea::placeholder {
   display: block;
   width: 32px;
   height: 32px;
+}
+
+.connect-wallet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-info {
+  display: none;
 }
 
 /* 媒体查询框架 */
